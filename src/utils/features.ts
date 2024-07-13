@@ -14,7 +14,7 @@ export const  connectDB = (uri: string) => {
 
 // mongodb://localhost:27017/
 
-export const inValidatesCache = ({
+export const invalidatesCache = ({
     product,
     order,
     admin,

@@ -5,7 +5,7 @@ import { TryCatch } from "../middleware/error.js";
 import ErrorHandler from "../utils/utility-class.js";
 import { rm } from "fs";
 import { myCache } from "../app.js";
-import { inValidatesCache } from "../utils/features.js";
+import { invalidatesCache } from "../utils/features.js";
 // import { faker } from "@faker-js/faker";
 
 
@@ -136,7 +136,7 @@ export const newProduct = TryCatch(
             photo: photo?.path,
         });
 
-        inValidatesCache({ product: true, admin: true});
+        invalidatesCache({ product: true, admin: true});
 
         return res.status(201).json({
             success:true,
@@ -173,7 +173,7 @@ export const updateProduct = TryCatch(
 
        await product.save();
 
-       inValidatesCache({ product: true,productId:String(product._id),admin: true});
+       invalidatesCache({ product: true,productId:String(product._id),admin: true});
 
         return res.status(200).json({
             success:true,
@@ -197,7 +197,7 @@ export const deleteProduct = TryCatch(
 
        await product.deleteOne();
 
-       inValidatesCache({ product: true,productId:String(product._id),admin: true});
+       invalidatesCache({ product: true,productId:String(product._id),admin: true});
 
         return res.status(201).json({
             success:true,

@@ -2,7 +2,7 @@ import { Request } from "express";
 import { TryCatch } from "../middleware/error.js";
 import { NewOrderRequestBody } from "../types/types.js";
 import { Order } from "../models/order.js";
-import { inValidatesCache, reduceStock } from "../utils/features.js";
+import { invalidatesCache, reduceStock } from "../utils/features.js";
 import ErrorHandler from "../utils/utility-class.js";
 import { myCache } from "../app.js";
 
@@ -87,7 +87,7 @@ export const allOrders = TryCatch( async (req,res,next) => {
 
     await reduceStock(orderItems);
 
-    inValidatesCache({
+    invalidatesCache({
       product: true,
       order: true,
       admin: true,
@@ -124,7 +124,7 @@ export const processOrder = TryCatch( async (req,res,next) => {
     
     await order.save();
 
-    inValidatesCache({
+    invalidatesCache({
         product: true,
         order: true,
         admin: true,
@@ -146,7 +146,7 @@ export const deleteOrder = TryCatch(async (req, res, next) => {
   
     await order.deleteOne();
   
-    inValidatesCache({
+    invalidatesCache({
       product: false,
       order: true,
       admin: true,
