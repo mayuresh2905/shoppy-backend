@@ -1,12 +1,12 @@
 import express from "express";
 import { adminOnly } from "../middleware/auth.js";
-import { singleUpload } from "../middleware/multer.js";
-import { deleteProduct, getAdminProducts, getAllCategories, getAllProducts, getLatestProducts, getSingleProduct, newProduct, updateProduct } from "../controllers/product.js";
+import { multiUpload, singleUpload } from "../middleware/multer.js";
+import { allReviewsOfProduct, deleteProduct, deleteReview, getAdminProducts, getAllCategories, getAllProducts, getLatestProducts, getSingleProduct, newProduct, newReview, updateProduct } from "../controllers/product.js";
 
 const app = express.Router();
 
 //Route(Creating New Product) - /api/v1/product/new
-app.post("/new",adminOnly,singleUpload,newProduct);
+app.post("/new",adminOnly,multiUpload,newProduct);
 
 //Route(To get all Products with filters) - /api/v1/product/all
 app.get("/all",getAllProducts);
@@ -24,10 +24,12 @@ app.get("/admin-products",adminOnly,getAdminProducts);
 app
    .route("/:id")
    .get(getSingleProduct)
-   .put(adminOnly,singleUpload,updateProduct)
+   .put(adminOnly,multiUpload,updateProduct)
    .delete(adminOnly,deleteProduct);
 
-
+app.get("/reviews/:id",allReviewsOfProduct);
+app.post("/review/new/:id",newReview);
+app.delete("/review/:id",deleteReview);
 
 
 
