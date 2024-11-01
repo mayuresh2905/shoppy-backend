@@ -7,6 +7,7 @@ import { redis, redisTTL } from "../app.js";
 import { deleteFromCloudinary, findAverageRatings, invalidatesCache, uploadToCloudinary } from "../utils/features.js";
 import { User } from "../models/user.js";
 import { Review } from "../models/review.js";
+import { Types } from 'mongoose'
 // import { faker } from "@faker-js/faker";
 
 
@@ -172,7 +173,7 @@ export const updateProduct = TryCatch(
         
             await deleteFromCloudinary(ids);
         
-            product.photos = photosURL;
+            product.photos = photosURL as unknown as Types.DocumentArray<{ public_id: string; url: string }>;
      }
 
        if (name) product.name = name;

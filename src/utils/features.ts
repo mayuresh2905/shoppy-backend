@@ -1,6 +1,6 @@
 import mongoose, { Document } from "mongoose";
 import { InvalidateCacheProps, OrderItemType } from "../types/types.js";
-import { myCache, redis } from "../app.js";
+import { redis } from "../app.js";
 import { Product } from "../models/product.js";
 import { UploadApiResponse,v2 as cloudinary } from "cloudinary";
 import { Order } from "../models/order.js";
